@@ -11,7 +11,7 @@ tag:
 
 ## 问题：flask中会接收多个请求，那他们不会搞混吗？
 
-Flask内部，通过维护一个dict来实现线程隔离。伪代码如下 request={thread_key1:Request1,thread_key2:Request2} 其中thread_key是线程的唯一id号，Request就是每次请求的Request对象
+Flask内部，通过维护一个dict来实现线程隔离。伪代码如下 `request={thread_key1:Request1,thread_key2:Request2}` 其中thread_key是线程的唯一id号，Request就是每次请求的Request对象
 
 Flask内部引入了一个werkzeug的库，这个库里有一个local模块，里面有一个Local对象，Flask内部线程隔离就是通过操作Local对象实现的。
 

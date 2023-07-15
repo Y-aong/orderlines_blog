@@ -7,20 +7,21 @@ category:
 tag:
   - 线程隔离
 ---
-# flask中的线程隔离
 
-## 问题：flask中会接收多个请求，那他们不会搞混吗？
+# flask 中的线程隔离
 
-Flask内部，通过维护一个dict来实现线程隔离。伪代码如下 request={thread_key1:Request1,thread_key2:Request2} 其中thread_key是线程的唯一id号，Request就是每次请求的Request对象
+## 问题：flask 中会接收多个请求，那他们不会搞混吗？
 
-Flask内部引入了一个werkzeug的库，这个库里有一个local模块，里面有一个Local对象，Flask内部线程隔离就是通过操作Local对象实现的。
+Flask 内部，通过维护一个 dict 来实现线程隔离。伪代码如下 `request={thread_key1:Request1,thread_key2:Request2}`其中 thread_key 是线程的唯一 id 号，Request 就是每次请求的 Request 对象
 
-## Local对象
+Flask 内部引入了一个 werkzeug 的库，这个库里有一个 local 模块，里面有一个 Local 对象，Flask 内部线程隔离就是通过操作 Local 对象实现的。
 
-Local对象实际上就是对字典原理的一个封装
+## Local 对象
+
+Local 对象实际上就是对字典原理的一个封装
 
 class Local(object):
-    __slots__ = ('__storage__', '__ident_func__')
+**slots** = ('**storage**', '**ident_func**')
 
 ```python
 def __init__(self):
@@ -63,6 +64,7 @@ def __delattr__(self, name):
 ```
 
 ## 使用线程隔离和不适用线程隔离的区别
+
 定义一个对象，启动一个线程去修改这个对象，使用主线程打印这个对象
 
 ```python
@@ -85,7 +87,7 @@ print(my_obj.b)
 # 因为my_obj是主线程和新线程共享的对象
 ```
 
-将my_obj实例化改为使用Local线程隔离对象
+将 my_obj 实例化改为使用 Local 线程隔离对象
 
 ```python
 
@@ -117,16 +119,15 @@ in new thread b is:  2
 in main thread b is: 1
 ```
 
+由于 my_obj 是一个线程隔离的对象，所以我们在新线程里修改 my_obj 是不会影响主线程里 my_obj 中的值的。他们保持了两个线程之间的数据的独立
 
-由于my_obj是一个线程隔离的对象，所以我们在新线程里修改my_obj是不会影响主线程里my_obj中的值的。他们保持了两个线程之间的数据的独立
-
-Local的高明在于，他不需要我们去关心底层Local字典内部的细节，我们之间去操作Local对象的相关属性，这个操作本就是线程隔离的，给我们带来了很大的方便
-
+Local 的高明在于，他不需要我们去关心底层 Local 字典内部的细节，我们之间去操作 Local 对象的相关属性，这个操作本就是线程隔离的，给我们带来了很大的方便
 
 ## 线程隔离的栈：LocalStack
+
 ![image.png](https://bineanju.gitee.io/blog/post/20160505flask05/1.jpg)
 
-接下来来继续讲解之前这张图右下角的部分。 通过Flask的源码，我们可以了解到_app_ctx_stack和_request_ctx_stack实际上是指向了LocalStack()对象，也就是一个线程隔离的栈,下面来看下源码
+接下来来继续讲解之前这张图右下角的部分。 通过 Flask 的源码，我们可以了解到\_app_ctx_stack 和\_request_ctx_stack 实际上是指向了 LocalStack()对象，也就是一个线程隔离的栈,下面来看下源码
 
 globals.py
 
@@ -141,7 +142,7 @@ session = LocalProxy(partial(_lookup_req_object, 'session'))
 g = LocalProxy(partial(_lookup_app_object, 'g'))
 ```
 
-LocalStack源码，依旧在werkzeug库 的local模块下
+LocalStack 源码，依旧在 werkzeug 库 的 local 模块下
 
 ```python
 class LocalStack(object):
@@ -200,10 +201,11 @@ class LocalStack(object):
         except (AttributeError, IndexError):
             return None
 ```
-Local,Local Stack,字典的关系 Local使用字典的方式实现了线程隔离 Local Stack封装了Local对象，将其作为自己的一个属性，实现了线程隔离的栈结构
 
-3.LocalStack的基本用法
-Local是使用·来直接操作字典中保存的对象。 LocalStack是使用它提供的一些push，pop的栈方法来操作对象
+Local,Local Stack,字典的关系 Local 使用字典的方式实现了线程隔离 Local Stack 封装了 Local 对象，将其作为自己的一个属性，实现了线程隔离的栈结构
+
+3.LocalStack 的基本用法
+Local 是使用·来直接操作字典中保存的对象。 LocalStack 是使用它提供的一些 push，pop 的栈方法来操作对象
 
 ```python
 from werkzeug.local import LocalStack
@@ -220,4 +222,3 @@ s.push(2)
 
 # 结果2221
 ```
-

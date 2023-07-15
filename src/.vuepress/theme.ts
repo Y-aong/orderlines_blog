@@ -42,7 +42,7 @@ export default hopeTheme({
       displayFooter: true,
 
       blog: {
-        description: "python闭包 爱好者",
+        description: "python爱好者",
         intro: "/intro.html",
       },
 
