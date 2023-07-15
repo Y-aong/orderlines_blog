@@ -5,4 +5,8 @@ cover: /assets/images/cover3.jpg
 
 # Intro Page
 
-Place your introduction and profile here.
+python enthusiasts, also learning front-end and goland
+
+Try to get to the full stack
+
+Currently writing a workflow for microservices, in progress
