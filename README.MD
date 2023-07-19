@@ -18,3 +18,7 @@ pnpm docs:clean-dev 清除缓存并启动开发服务器
 ```shell
 sh deploy.sh
 ```
+
+## 博客地址
+
+https://y-aong.github.io/orderlines_blog/
