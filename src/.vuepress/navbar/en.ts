@@ -1,4 +1,4 @@
-import {navbar} from "vuepress-theme-hope";
+import { navbar } from "vuepress-theme-hope";
 
 export const enNavbar = navbar([
   "/",
@@ -66,6 +66,12 @@ export const enNavbar = navbar([
         text: "网络协议",
         icon: "pen-to-square",
         prefix: "网络协议/",
+        children: [],
+      },
+      {
+        text: "代码风格",
+        icon: "pen-to-square",
+        prefix: "代码风格/",
         children: [],
       }
     ]

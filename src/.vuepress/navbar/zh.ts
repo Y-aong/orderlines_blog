@@ -1,4 +1,4 @@
-import {navbar} from "vuepress-theme-hope";
+import { navbar } from "vuepress-theme-hope";
 
 export const zhNavbar = navbar([
   "/zh/",
@@ -68,6 +68,12 @@ export const zhNavbar = navbar([
         prefix: "网络协议/",
         children: [],
       },
+      {
+        text: "代码风格",
+        icon: "pen-to-square",
+        prefix: "代码风格/",
+        children: [],
+      }
     ],
   },
 ]);
