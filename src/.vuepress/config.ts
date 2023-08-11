@@ -1,4 +1,6 @@
-import {defineUserConfig} from "vuepress";
+import { defineUserConfig } from "vuepress";
+import { searchProPlugin } from "vuepress-plugin-search-pro";
+
 import theme from "./theme.js";
 
 
@@ -28,5 +30,25 @@ export default defineUserConfig({
         content: "no-referrer"
       }
     ],
+  ],
+  plugins: [
+    searchProPlugin({
+      customFields: [
+        {
+          getter: (page: any) => page.frontmatter.category,
+          formatter: {
+            "/": "Category: $content",
+            "/zh/": "分类：$content",
+          },
+        },
+        {
+          getter: (page: any) => page.frontmatter.tag,
+          formatter: {
+            "/": "Tag: $content",
+            "/zh/": "标签：$content",
+          },
+        },
+      ],
+    }),
   ],
 });

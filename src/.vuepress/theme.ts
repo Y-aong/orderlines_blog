@@ -117,11 +117,11 @@ export default hopeTheme({
       stylize: [
         {
           matcher: "Recommended",
-          replacer: ({tag}) => {
+          replacer: ({ tag }) => {
             if (tag === "em")
               return {
                 tag: "Badge",
-                attrs: {type: "tip"},
+                attrs: { type: "tip" },
                 content: "Recommended",
               };
           },
