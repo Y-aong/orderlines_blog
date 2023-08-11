@@ -57,12 +57,6 @@ export const zhNavbar = navbar([
         children: [],
       },
       {
-        text: "python设计模式",
-        icon: "pen-to-square",
-        prefix: "python设计模式/",
-        children: [],
-      },
-      {
         text: "网络协议",
         icon: "pen-to-square",
         prefix: "网络协议/",
