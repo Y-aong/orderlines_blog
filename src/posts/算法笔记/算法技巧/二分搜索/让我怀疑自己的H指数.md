@@ -1,0 +1,125 @@
+---
+icon: pen-to-square
+date: 2024-03-27
+category:
+  - 算法笔记
+  - 二分算法
+tag:
+  - 二分算法
+star: true
+---
+
+# 让我怀疑自己的H指数
+
+
+
+这道题目其实代码不难，但是题意让我觉得很崩溃，我想了好久都没有想明白，一度让我觉得我是不是脑子不够用
+
+
+
+### [275. H 指数 II](https://leetcode.cn/problems/h-index-ii/)
+
+给你一个整数数组 `citations` ，其中 `citations[i]` 表示研究者的第 `i` 篇论文被引用的次数，`citations` 已经按照 **升序排列** 。计算并返回该研究者的 h 指数。
+
+[h 指数的定义](https://baike.baidu.com/item/h-index/3991452?fr=aladdin)：h 代表“高引用次数”（high citations），一名科研人员的 `h` 指数是指他（她）的 （`n` 篇论文中）**至少** 有 `h` 篇论文分别被引用了**至少** `h` 次。
+
+请你设计并实现对数时间复杂度的算法解决此问题。
+
+ 
+
+**示例 1：**
+
+```
+输入：citations = [0,1,3,5,6]
+输出：3
+解释：给定数组表示研究者总共有 5 篇论文，每篇论文相应的被引用了 0, 1, 3, 5, 6 次。
+     由于研究者有3篇论文每篇 至少 被引用了 3 次，其余两篇论文每篇被引用 不多于 3 次，所以她的 h 指数是 3 。
+```
+
+**示例 2：**
+
+```
+输入：citations = [1,2,100]
+输出：2
+```
+
+**提示：**
+
+- `n == citations.length`
+- `1 <= n <= 105`
+- `0 <= citations[i] <= 1000`
+- `citations` 按 **升序排列**
+
+我对于这个题意总是不太明白，对于很多题解所以也不明白
+
+我们要抓住这句话（`n` 篇论文中）**至少** 有 `h` 篇论文分别被引用了**至少** `h` 次。
+
+如果直接暴力遍历的话代码如下
+
+```python
+class Solution:
+    def hIndex(self, citations: List[int]) -> int:
+        count = 0
+        for i in range(len(citations) - 1, -1, -1):
+            if citations[i] > count:
+                count += 1
+        return count
+
+```
+
+但是这样不满足对数时间复杂度
+
+所以想到了二分算法
+
+二分算法的前提是数据有序，也是正好用到了数据的有序性
+
+我总结下来二分算法需要问自己以下几个问题
+
+- 我们求的是什么。
+- 开区间还是闭区间
+- left,middle,right代表什么
+
+**回答**
+
+- 我们要求的是什么：论文数量。（n 篇论文中）至少 有 h 篇论文分别被引用了至少 h 次。可以使用索引来求出
+
+   -  使用开区间还是闭区间，开区间
+    -  left, right， middle分别指的是什么
+        - left:left篇论文至少被引用left次，就是答案
+        - middle:我们需要判断的答案(论文数量)
+        - right:一定不是答案
+
+- left,right在循环中会不会意义改变
+
+其实只要回答以上几个问题代码也就随即出来了
+
+```python
+def hIndex1(citations: List[int]) -> int:
+    """
+    1、我们要求的是什么：论文数量。（n 篇论文中）至少 有 h 篇论文分别被引用了至少 h 次。可以使用索引来求出
+    2、使用开区间还是闭区间，开区间
+    3、left, right， middle分别指的是什么
+        left:left篇论文至少被引用left次，就是答案
+        middle:我们需要判断的答案(论文数量)
+        right:一定不是答案
+    """
+    left = 0
+    right = len(citations) + 1
+    while left + 1 < right:
+        middle = (left + right) // 2  # 指的是论文数量
+        # 这里指的是从右到左寻找，当前citations[-middle]引用次数大于它的论文数量
+        if citations[-middle] >= middle:
+            left = middle
+        else:
+            right = middle
+    return left
+
+
+print(hIndex1([0, 1, 3, 5, 6]))
+print(hIndex1([1, 2, 100]))
+```
+
+
+
+
+

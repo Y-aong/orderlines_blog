@@ -6,17 +6,11 @@ import theme from "./theme.js";
 
 export default defineUserConfig({
   base: "/orderlines_blog/",
-
   locales: {
-    "/zh/": {
-      lang: "zh-CN",
-      title: "ORDERLINES",
-      description: "让流程井然有序",
-    },
     "/": {
       lang: "en-US",
       title: "ORDERLINES",
-      description: "Keep the process organized",
+      description: "个人博客",
     },
 
   },
@@ -38,14 +32,12 @@ export default defineUserConfig({
           getter: (page: any) => page.frontmatter.category,
           formatter: {
             "/": "Category: $content",
-            "/zh/": "分类：$content",
           },
         },
         {
           getter: (page: any) => page.frontmatter.tag,
           formatter: {
             "/": "Tag: $content",
-            "/zh/": "标签：$content",
           },
         },
       ],

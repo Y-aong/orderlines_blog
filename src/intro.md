@@ -3,10 +3,10 @@ icon: circle-info
 cover: /assets/images/cover3.jpg
 ---
 
-# Intro Page
+# 介绍页
 
-python enthusiasts, also learning front-end and goland
+python爱好者，也在学习前端
+争取往全栈的方向冲
+目前在写一个工作流的微服务，正在进行时
 
-Try to get to the full stack
-
-Currently writing a workflow for microservices, in progress
+---

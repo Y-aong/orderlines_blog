@@ -2,36 +2,35 @@
 home: true
 layout: BlogHome
 icon: home
-title: Blog Home
+title: 博客
 heroImage: /logo.svg
 heroText: ORDERLINES
-tagline: Keep the process organized
+tagline: 个人博客
 heroFullScreen: true
 projects:
   - icon: project
-    name: project name
-    desc: project detailed description
+    name: 项目名称
+    desc: orderlines项目地址
     link: https://your.project.link
 
   - icon: link
-    name: link name
-    desc: link detailed description
+    name: 相关链接
+    desc: orderlines演示网站
     link: https://link.address
 
   - icon: article
-    name: article name
-    desc: Detailed description of the article
+    name: 文章名称
+    desc: orderlines相关文档
     link: https://link.to.your.article
 
   - icon: friend
-    name: friend name
-    desc: Detailed description of friend
+    name: 联系方式
+    desc: 个人联系方式
     link: https://link.to.your.friend
   
 
 footer: customize your footer text
 ---
-
 This is a blog home page demo.
 
 To use this layout, you should set both `layout: BlogHome` and `home: true` in the page front matter.

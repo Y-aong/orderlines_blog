@@ -1,0 +1,238 @@
+---
+icon: pen-to-square
+date: 2024-04-06
+category:
+  - 算法笔记
+  - 图论
+tag:
+  - 二分图
+---
+
+
+
+# 二分图
+
+### 一、二分图的定义
+
+官方定义比较绕口，`二分图的顶点集可分割为两个互不相交的子集，图中每条边依附的两个顶点都分属于这两个子集，且两个子集内的顶点不相邻。`但是通俗理解就是能不能将一个边的两个节点分别属于不同颜色的集合中
+
+<img src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/gibkIz0MVqdEHc01wZTpaCcy92roIW5z5zmVYfGHRnfEeuJgPnDDko1AgrZkvVibicqbhaKgoergMv3ibDdleauJibA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片" style="zoom:50%;" />
+
+，如何存储电影演员和电影之间的关系？
+
+如果用哈希表存储，需要两个哈希表分别存储「每个演员到电影列表」的映射和「每部电影到演员列表」的映射。
+
+但如果用「图」结构存储，将电影和参演的演员连接，很自然地就成为了一幅二分图：
+
+<img src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/gibkIz0MVqdEHc01wZTpaCcy92roIW5z5pnNIDxicOibLk6BKUq5MdhyOySOia63kRFh3y0p2qxDcZv59BHFaIXAZg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片" style="zoom:50%;" />
+
+每个电影节点的相邻节点就是参演该电影的所有演员，每个演员的相邻节点就是该演员参演过的所有电影，非常方便直观。
+
+### 二分图的判定方法
+
+我们可以遍历一遍图，边遍历边进行染色，看看能不能使用两种颜色给所有的节点进行染色，且相邻节点的颜色都不同
+
+图的遍历框架为
+
+```python
+visited = []
+def dfs(graph, node):
+	if visited[node]:
+		return
+    visited[node] = True
+	for val in graph[node]:
+		dfs(graph, val)
+	
+```
+
+这是一个标准的后序遍历，后序遍历的优点就是可以在我们遍历完数据后得到返回值后进行处理。
+
+二分图是要求我们获取到该节点和其相邻节点的颜色都不一致。如果该节点和它的相邻节点颜色一致了，那么这就不是一个二分图了
+
+那么我们稍微修改一下，可以写成这样边遍历边进行染色
+
+```python
+visited = []
+def dfs(graph, node):
+	visited[node] = True
+	for val in graph[node]:
+		if visited[val]:
+			# 这里就不是一个二分图
+		else:
+			dfs(graph, val)
+```
+
+
+
+### [785. 判断二分图](https://leetcode.cn/problems/is-graph-bipartite/)
+
+
+
+存在一个 **无向图** ，图中有 `n` 个节点。其中每个节点都有一个介于 `0` 到 `n - 1` 之间的唯一编号。给你一个二维数组 `graph` ，其中 `graph[u]` 是一个节点数组，由节点 `u` 的邻接节点组成。形式上，对于 `graph[u]` 中的每个 `v` ，都存在一条位于节点 `u` 和节点 `v` 之间的无向边。该无向图同时具有以下属性：
+
+- 不存在自环（`graph[u]` 不包含 `u`）。
+- 不存在平行边（`graph[u]` 不包含重复值）。
+- 如果 `v` 在 `graph[u]` 内，那么 `u` 也应该在 `graph[v]` 内（该图是无向图）
+- 这个图可能不是连通图，也就是说两个节点 `u` 和 `v` 之间可能不存在一条连通彼此的路径。
+
+**二分图** 定义：如果能将一个图的节点集合分割成两个独立的子集 `A` 和 `B` ，并使图中的每一条边的两个节点一个来自 `A` 集合，一个来自 `B` 集合，就将这个图称为 **二分图** 。
+
+如果图是二分图，返回 `true` ；否则，返回 `false` 。
+
+ 
+
+**示例 1：**
+
+![img](https://assets.leetcode.com/uploads/2020/10/21/bi2.jpg)
+
+```
+输入：graph = [[1,2,3],[0,2],[0,1,3],[0,2]]
+输出：false
+解释：不能将节点分割成两个独立的子集，以使每条边都连通一个子集中的一个节点与另一个子集中的一个节点。
+```
+
+**示例 2：**
+
+![img](https://assets.leetcode.com/uploads/2020/10/21/bi1.jpg)
+
+```
+输入：graph = [[1,3],[0,2],[1,3],[0,2]]
+输出：true
+解释：可以将节点分成两组: {0, 2} 和 {1, 3} 。
+```
+
+ 
+
+**提示：**
+
+- `graph.length == n`
+- `1 <= n <= 100`
+- `0 <= graph[u].length < n`
+- `0 <= graph[u][i] <= n - 1`
+- `graph[u]` 不会包含 `u`
+- `graph[u]` 的所有值 **互不相同**
+- 如果 `graph[u]` 包含 `v`，那么 `graph[v]` 也会包含 `u`
+
+```python
+class Solution12:
+    def __init__(self):
+        # 表示不能将图的每个节点分到两个不同集合中，也就是表示不是二分图
+        self.flag = False
+        self.visited = None
+        self.color = None
+
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        n = len(graph)
+        self.visited = [False] * n
+        self.color = [False] * n
+
+        for i in range(n):
+            if not self.visited[i]:
+                self.dfs(graph, i)
+        return not self.flag
+
+    def dfs(self, graph, node):
+        if self.flag:
+            return
+        self.visited[node] = True
+
+        for val in graph[node]:
+            if not self.visited[val]:
+                self.color[val] = not self.color[node]
+                self.dfs(graph, val)
+            else:
+                if self.color[val] == self.color[node]:
+                    self.flag = True
+```
+
+### [886. 可能的二分法](https://leetcode.cn/problems/possible-bipartition/)——有向图，需要自己构造图
+
+给定一组 `n` 人（编号为 `1, 2, ..., n`）， 我们想把每个人分进**任意**大小的两组。每个人都可能不喜欢其他人，那么他们不应该属于同一组。
+
+给定整数 `n` 和数组 `dislikes` ，其中 `dislikes[i] = [ai, bi]` ，表示不允许将编号为 `ai` 和 `bi`的人归入同一组。当可以用这种方法将所有人分进两组时，返回 `true`；否则返回 `false`。
+
+**示例 1：**
+
+```
+输入：n = 4, dislikes = [[1,2],[1,3],[2,4]]
+输出：true
+解释：group1 [1,4], group2 [2,3]
+```
+
+**示例 2：**
+
+```
+输入：n = 3, dislikes = [[1,2],[1,3],[2,3]]
+输出：false
+```
+
+**示例 3：**
+
+```
+输入：n = 5, dislikes = [[1,2],[2,3],[3,4],[4,5],[1,5]]
+输出：false
+```
+
+ 
+
+**提示：**
+
+- `1 <= n <= 2000`
+- `0 <= dislikes.length <= 104`
+- `dislikes[i].length == 2`
+- `1 <= dislikes[i][j] <= n`
+- `ai < bi`
+- `dislikes` 中每一组都 **不同**
+
+思路：
+
+本题和上题最大的不同就是本题是有向图，上一道题为无向图，且本题的图需要自己构造。
+
+整体思路都是一致的。
+
+```python
+class Solution:
+    def __init__(self):
+        self.color = None
+        self.visited = None
+        self.flag = False  # 是二分图
+
+    def possibleBipartition(self, n: int, dislikes: List[List[int]]) -> bool:
+
+        self.visited = [False] * n
+        self.color = [False] * n
+        # 构造图
+        graph = self.build_graph(n, dislikes)
+        # 进行二分判定
+        for i in range(n):
+            if not self.visited[i]:
+                self.dfs(graph, i)
+        return not self.flag
+
+    def dfs(self, graph, node):
+        if self.flag:
+            return
+        self.visited[node] = True
+        for val in graph[node]:
+            if self.visited[val]:
+                if self.color[val] == self.color[node]:
+                    self.flag = True  # 不是二分图
+            else:
+                self.color[val] = not self.color[node]
+                self.dfs(graph, val)
+
+    def build_graph(self, n, dislikes):
+        graph = [[] for _ in range(n)]
+
+        for edge in dislikes:
+            _from, _to = edge
+            graph[_from -1].append(_to - 1)
+            graph[_to - 1 ].append(_from - 1)
+        return graph
+
+```
+
+这个代码需要注意两点
+
+- 我们要判断从每个节点开始都可不可以放到两个集合中
+- 需要注意当前节点和上个的相邻节点是不是同一种颜色
