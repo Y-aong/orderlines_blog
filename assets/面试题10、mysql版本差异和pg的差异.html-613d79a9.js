@@ -1,0 +1,45 @@
+import{_ as e}from"./plugin-vue_export-helper-c27b6911.js";import{o as i,c as n,e as s}from"./app-48200f17.js";const d={},l=s(`<h1 id="面试题10、-mysql和pg的异同" tabindex="-1"><a class="header-anchor" href="#面试题10、-mysql和pg的异同" aria-hidden="true">#</a> 面试题10、 mysql和pg的异同</h1><h3 id="mysql-5-7和8-0的区别" tabindex="-1"><a class="header-anchor" href="#mysql-5-7和8-0的区别" aria-hidden="true">#</a> <code>mysql 5.7和8.0</code>的区别</h3><h4 id="mysql8-0的新特点" tabindex="-1"><a class="header-anchor" href="#mysql8-0的新特点" aria-hidden="true">#</a> <code>Mysql8.0</code>的新特点</h4><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>使用JSON表函数，您可以使用JSON数据的SQL机制。
+GIS地理支持。空间参考系统（SRS），以及SRS感知空间数据类型，空间索引和空间功能。
+可靠性 DDL语句已变得原子性和崩溃安全，元数据存储在单个事务数据字典中。
+由InnoDB提供支持！可观察性性能架构，信息架构，配置变量和错误记录的显着增强。
+可管理性远程管理，撤消表空间管理和新的即时DDL。
+安全 OpenSSL改进，新的默认身份验证，SQL角色，分解超级特权，密码强度等等。
+性能 InnoDB在读/写工作负载，IO绑定工作负载和高争用“热点”工作负载方面明显更好。
+增加了资源组功能，通过将用户线程映射到CPU，为用户提供一个选项，以针对特定硬件上的特定工作负载进行优化 。
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li><p>缓存</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>使用缓存的好处：当MySQL接收到客户端的查询SQL之后，仅仅只需要对其进行相应的权限验证之后，就会通过Query Cache来查找结果，甚至都不需要经过Optimizer模块进行执行计划的分析优化，更不需要发生任何存储引擎的交互.
+
+mysql5.7支持内部缓存，8.0之后已废弃
+
+mysql缓存的限制
+
+1. mysql基本没有手段灵活的管理缓存失效和生效，尤其对于频繁更新的表
+2. SQL必须完全一致才会导致cache命中
+3. 为了节省内存空间，太大的result set不会被cache (&lt; query_cache_limit)；
+4. MySQL缓存在分库分表环境下是不起作用的；
+5. 执行SQL里有触发器,自定义函数时，MySQL缓存也是不起作用的；
+6. 在表的结构或数据发生改变时，基于该表相关cache立即全部失效。
+
+替代方案
+
+* 应用层组织缓存，最简单的是使用redis，ehcached等
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li><p>账户与安全</p></li></ul><h3 id="mysql-和-pg-的区别" tabindex="-1"><a class="header-anchor" href="#mysql-和-pg-的区别" aria-hidden="true">#</a> mysql 和 pg 的区别</h3><p>pg 优势</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>1、在SQL的标准实现上要比MySQL完善，而且功能实现比较严谨；
+
+2、存储过程的功能支持要比MySQL好，具备本地缓存执行计划的能力；
+
+3、对表连接支持较完整，优化器的功能较完整，支持的索引类型很多，复杂查询能力较强；
+
+4、PG主表采用堆表存放，MySQL采用索引组织表，能够支持比MySQL更大的数据量。
+
+5、PG的主备复制属于物理复制，相对于MySQL基于binlog的逻辑复制，数据的一致性更加可靠，复制性能更高，对主机性能的影响也更小。
+
+6、MySQL的存储引擎插件化机制，存在锁机制复杂影响并发的问题，而PG不存在。
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>mysql 优势</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>1、innodb的基于回滚段实现的MVCC机制，相对PG新老数据一起存放的基于XID的MVCC机制，是占优的。新老数据一起存放，需要定时触 发VACUUM，会带来多余的IO和数据库对象加锁开销，引起数据库整体的并发能力下降。而且VACUUM清理不及时，还可能会引发数据膨胀；
+
+2、MySQL采用索引组织表，这种存储方式非常适合基于主键匹配的查询、删改操作，但是对表结构设计存在约束；
+
+3、MySQL的优化器较简单，系统表、运算符、数据类型的实现都很精简，非常适合简单的查询操作；
+
+4、MySQL分区表的实现要优于PG的基于继承表的分区实现，主要体现在分区个数达到上千上万后的处理性能差异较大。
+
+5、MySQL的存储引擎插件化机制，使得它的应用场景更加广泛，比如除了innodb适合事务处理场景外，myisam适合静态数据的查询场景。
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,10),a=[l];function r(v,c){return i(),n("div",null,a)}const t=e(d,[["render",r],["__file","面试题10、mysql版本差异和pg的差异.html.vue"]]);export{t as default};

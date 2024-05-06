@@ -1,0 +1,32 @@
+import{_ as t}from"./plugin-vue_export-helper-c27b6911.js";import{r as i,o as l,c as o,a as n,b as s,d,e}from"./app-48200f17.js";const c={},p=e(`<h1 id="二分搜索个人总结" tabindex="-1"><a class="header-anchor" href="#二分搜索个人总结" aria-hidden="true">#</a> 二分搜索个人总结</h1><h3 id="一、个人总结" tabindex="-1"><a class="header-anchor" href="#一、个人总结" aria-hidden="true">#</a> 一、个人总结</h3><p>个人感觉二分搜索挺简单的，但是有时候很多二分题目又做不出来，就是觉得非常的不舒服，网上也有很多的二分法的总结，什么开区间，闭区间，左开右闭，左闭右开，红蓝染色法，方法论真的是一大堆，但是对于很多题目又是力不从心。感觉有时候又会觉得无从下手，那我我根据我的做题经验来总结下我的理解。</p><ul><li>开区间：首先我比较喜欢开区间的方法，但是开区间又不是简单的左开就是-1，右开就是len(num),这个需要根据题目来具体确定</li><li>问题的单调性：这个也是我们使用二分法的一个非常重要的方式，如果问题没有单调性那么我们就不要使用二分法了</li><li>左右指针分别代表什么：有时候我们在做题的时候一定要清楚左右指针代表着什么，这个也是很多大神说的循环不变量。这个很多时候也决定我们要返回什么数据</li><li>左右区间的分界线：这个也就是题目中求得是什么，有时候这个左右区间的分界线需要我们根据题目分界求出来，有时候不是一眼就可以看出来的。</li></ul><p>当我们确定以上几点，也就是开区间，问题的单调性，左右指针代表什么，左右区间的分界我们剩下的事才是套模版</p><h3 id="二、模版分享" tabindex="-1"><a class="header-anchor" href="#二、模版分享" aria-hidden="true">#</a> 二、模版分享</h3><p>首先说明我就只喜欢开区间，因为我不喜欢加一减一这些很繁琐的操作</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>left = -1
+right = len(nums)
+while left + 1 != right:
+	middle = (left+ right) // 2
+	if nums[middle] &gt; taget:
+		# 目标值在[left middle]
+		right = middle
+	else:
+		# 目标值在[middle right]
+		left = middle
+return right or left
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这里还有个小技巧就是我们不知道返回left还是right时我们，找个简单的例子带入试一下</p><h3 id="三、经典例题" tabindex="-1"><a class="header-anchor" href="#三、经典例题" aria-hidden="true">#</a> 三、经典例题</h3>`,10),r={id:"_704-二分查找",tabindex:"-1"},u=n("a",{class:"header-anchor",href:"#_704-二分查找","aria-hidden":"true"},"#",-1),m={href:"https://leetcode.cn/problems/binary-search/",target:"_blank",rel:"noopener noreferrer"},v=e(`<p>给定一个 <code>n</code> 个元素有序的（升序）整型数组 <code>nums</code> 和一个目标值 <code>target</code> ，写一个函数搜索 <code>nums</code> 中的 <code>target</code>，如果目标值存在返回下标，否则返回 <code>-1</code>。</p><p><strong>示例 1:</strong></p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>输入: nums = [-1,0,3,5,9,12], target = 9
+输出: 4
+解释: 9 出现在 nums 中并且下标为 4
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>示例 2:</strong></p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>输入: nums = [-1,0,3,5,9,12], target = 2
+输出: -1
+解释: 2 不存在 nums 中因此返回 -1
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>提示：</strong></p><ol><li>你可以假设 <code>nums</code> 中的所有元素是不重复的。</li><li><code>n</code> 将在 <code>[1, 10000]</code>之间。</li><li><code>nums</code> 的每个元素都将在 <code>[-9999, 9999]</code>之间。</li></ol><div class="language-python line-numbers-mode" data-ext="py"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">search</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">,</span> target<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        left <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+        right <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
+        <span class="token keyword">while</span> left <span class="token operator">+</span> <span class="token number">1</span><span class="token operator">!=</span> right<span class="token punctuation">:</span>
+            middle <span class="token operator">=</span> <span class="token punctuation">(</span>left<span class="token operator">+</span>right<span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">2</span>
+            <span class="token keyword">if</span> nums<span class="token punctuation">[</span>middle<span class="token punctuation">]</span> <span class="token operator">&gt;</span> target<span class="token punctuation">:</span>
+                <span class="token comment"># left middle</span>
+                right <span class="token operator">=</span> middle
+            <span class="token keyword">elif</span> nums<span class="token punctuation">[</span>middle<span class="token punctuation">]</span> <span class="token operator">&lt;</span> target<span class="token punctuation">:</span>
+                left <span class="token operator">=</span> middle
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> middle
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,8);function k(h,b){const a=i("ExternalLinkIcon");return l(),o("div",null,[p,n("h4",r,[u,s(),n("a",m,[s("704. 二分查找"),d(a)])]),v])}const f=t(c,[["render",k],["__file","二分搜索个人总结.html.vue"]]);export{f as default};
