@@ -14,31 +14,18 @@ export const enNavbar = navbar([
         prefix: "代码风格/",
         children: [],
       },
+      {
+        text: "模块设计",
+        icon: "pen-to-square",
+        prefix: "模块设计/",
+        children: [],
+      },
       // 算法笔记
       {
         text: "算法笔记",
         icon: "pen-to-square",
         prefix: "算法笔记/",
-        children: [
-          {
-            text: "经典问题",
-            icon: "pen-to-square",
-            prefix: "经典问题/",
-            children: [],
-          },
-          {
-            text: "算法技巧",
-            icon: "pen-to-square",
-            prefix: "算法技巧/",
-            children: [],
-          },
-          {
-            text: "数据结构",
-            icon: "pen-to-square",
-            prefix: "数据结构/",
-            children: [],
-          },
-        ],
+        children: [],
       },
       // 设计模式
       {
@@ -52,79 +39,50 @@ export const enNavbar = navbar([
         text: "源码分析",
         icon: "pen-to-square",
         prefix: "源码分析/",
-        children: [
-          {
-            text: "flask源码分析",
-            icon: "pen-to-square",
-            prefix: "redis/",
-            children: [],
-          },
-          {
-            text: "robotframework源码分析",
-            icon: "pen-to-square",
-            prefix: "mysql/",
-            children: [],
-          },
-        ],
+        children: []
+         
       },
-      // 中间件
+      // Devops
       {
-        text: "中间件",
+        text: "Devops",
         icon: "pen-to-square",
-        prefix: "中间件/",
-        children: [
-          {
-            text: "redis",
-            icon: "pen-to-square",
-            prefix: "redis/",
-            children: [],
-          },
-          {
-            text: "mysql",
-            icon: "pen-to-square",
-            prefix: "mysql/",
-            children: [],
-          },
-          // k8s
-          {
-            text: "k8s",
-            icon: "pen-to-square",
-            prefix: "k8s/",
-            children: [],
-          },
-        ],
+        prefix: "Devops/",
+        children: [],
+      },
+      // Kubernetes
+      {
+        text: "Kubernetes",
+        icon: "pen-to-square",
+        prefix: "Kubernetes/",
+        children: [],
+      },
+      // Mysql
+      {
+        text: "Mysql",
+        icon: "pen-to-square",
+        prefix: "Mysql/",
+        children: [],
+      },
+      // Redis
+      {
+        text: "Redis",
+        icon: "pen-to-square",
+        prefix: "Redis/",
+        children: [],
+      },
+      // Vue学习
+      {
+        text: "VUE",
+        icon: "pen-to-square",
+        prefix: "VUE/",
+        children: [],
       },
       // python
       {
         text: "python",
         icon: "pen-to-square",
         prefix: "python/",
-        children: [
-          {
-            text: "进阶用法",
-            icon: "pen-to-square",
-            prefix: "进阶用法/",
-            children: [],
-          },
-          {
-            text: "python框架",
-            icon: "pen-to-square",
-            prefix: "python框架/",
-            children: [],
-          },
-          {
-            text: "网络协议",
-            icon: "pen-to-square",
-            prefix: "网络协议/",
-            children: [],
-          },
-          {
-            text: "python其他",
-            icon: "pen-to-square",
-            prefix: "python其他/",
-            children: [],
-          },
-        ],
+        children: [],
       },
     ],
   },
