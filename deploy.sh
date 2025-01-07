@@ -17,7 +17,7 @@ git config --global user.name "Y-aong"
 git config --global user.email "1627469727@qq.com"
 
 # 填写你需要发布的仓库地址
-git push -f git@github.com:Y-aong/orderlines_blog.git master:gh-pages
+git push -f https://github.com/Y-aong/orderlines_blog.git master:gh-pages
 
 cd -
 
