@@ -11,17 +11,17 @@ projects:
   - icon: project
     name: 项目名称
     desc: orderlines项目地址
-    link: https://your.project.link
+    link: https://gitee.com/Y-aong/orderlines
 
   - icon: link
     name: 相关链接
     desc: orderlines演示网站
-    link: https://link.address
+    link: https://gitee.com/Y-aong/orderlines
 
   - icon: article
     name: 文章名称
     desc: orderlines相关文档
-    link: https://link.to.your.article
+    link: https://y-aong.github.io/orderlines_blog/
 
   - icon: friend
     name: 联系方式
