@@ -1,0 +1,1 @@
+import{_ as t}from"./plugin-vue_export-helper-c27b6911.js";import{o as a,c as o,a as e,b as r}from"./app-2d0f66e1.js";const _={},c=e("h1",{id:"回溯算法基础",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#回溯算法基础","aria-hidden":"true"},"#"),r(" 回溯算法基础")],-1),s=[c];function n(d,i){return a(),o("div",null,s)}const f=t(_,[["render",n],["__file","回溯模版.html.vue"]]);export{f as default};
