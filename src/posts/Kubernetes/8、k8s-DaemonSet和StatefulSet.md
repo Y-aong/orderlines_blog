@@ -8,7 +8,7 @@ tag:
   - devops
 ---
 
-# 8、k8s-DaemonSet, StatefulSet
+# 8、DaemonSet和StatefulSet
 
 
 

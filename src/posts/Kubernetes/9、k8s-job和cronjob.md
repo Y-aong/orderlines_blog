@@ -8,7 +8,7 @@ tag:
   - devops
 ---
 
-# 9、k8s——job和crontab
+# 9、任务和定时任务
 
 
 

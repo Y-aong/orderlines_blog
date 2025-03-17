@@ -8,7 +8,7 @@ tag:
   - devops
 ---
 
-# 6、k8d_deployment
+# 6、完成一次部署
 
 
 

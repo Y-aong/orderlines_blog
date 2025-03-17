@@ -8,7 +8,7 @@ tag:
   - 数据结构
 ---
 
-# redis3、skip-list跳表
+# 3、skip-list跳表
 
 
 

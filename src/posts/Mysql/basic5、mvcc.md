@@ -8,7 +8,7 @@ tag:
   - mysql调优
 ---
 
-# basic5、MVCC
+# 5、MVCC
 
 
 

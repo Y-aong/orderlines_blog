@@ -7,7 +7,7 @@ tag:
   - mysql调优
 ---
 
-# basic7、mysql锁机制
+# 7、mysql锁机制
 
 
 

@@ -8,7 +8,7 @@ tag:
   - devops
 ---
 
-# 7、k8s控制器rc和rs
+# 7、RC和RS
 
 
 

@@ -11,7 +11,7 @@ tag:
 
 
 
-# flask源码分析——路由分配，endpoint
+# 4、路由分配，Endpoint
 
 
 
@@ -25,7 +25,7 @@ web里的话，路由概念也是类似的，根据URL来将请求分配到指�
 
 
 
-### 二、endpoint
+### 二、Endpoint
 
 endpoint是flask中提出来的一个概念，我们先下结论就是**视图函数和url的中间值，我们可以利用endpoint找到url,也可以使用endpoint找到视图函数**。它是为了方便我们通过endpoint找到url,寻找视图函数的值。
 

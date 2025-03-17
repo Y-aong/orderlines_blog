@@ -8,7 +8,7 @@ tag:
   - 基础知识
 ---
 
-# basic1、mysql的体系系统
+# 1、mysql的体系
 
 
 

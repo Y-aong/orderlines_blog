@@ -7,7 +7,7 @@ tag:
   - mvcc
 ---
 
-# basic4、一条sql的执行过程
+# 4、sql的执行过程
 
 
 

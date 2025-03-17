@@ -8,7 +8,7 @@ tag:
   - mysql调优
 ---
 
-# basic6、mysql日志类型
+# 6、mysql日志类型
 
 
 

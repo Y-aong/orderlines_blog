@@ -7,7 +7,7 @@ tag:
   - mysql索引
 ---
 
-# basic8、mysql索引
+# 8、mysql索引
 
 
 

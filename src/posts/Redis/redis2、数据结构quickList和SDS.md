@@ -8,7 +8,7 @@ tag:
   - SDS
 ---
 
-# redis2、quickList和SDS
+# 2、quickList和SDS
 
 
 
