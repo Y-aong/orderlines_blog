@@ -376,10 +376,6 @@ celery -A celery_worker.celery beat -l info -s celery_logs
 
 - 配置方式
 
-  深色版本
-
-  
-
   ```shell
   # 启动命令（默认即为 prefork）
   celery -A your_app worker --loglevel=info
@@ -387,9 +383,9 @@ celery -A celery_worker.celery beat -l info -s celery_logs
   # 显式指定 pool 类型
   celery -A your_app worker --pool=prefork
   ```
-
+  
   或在配置文件中：
-
+  
   ```python
   app.conf.worker_pool = 'prefork'
   ```

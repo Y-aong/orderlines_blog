@@ -31,10 +31,12 @@ undo log也会产生redo log 因为undo log也要实现持久性保护
 
 - 提供回滚操作（实现事务的原子性）
 
-  ```
-  在数据修改的时候，不仅记录了redo log还记录了对应的undo log可以进行回滚
-  *undo log 和 redo log 记录物理日志不一样，它是*逻辑日志。可以认为当delete一条记录时，undo log中会记录一条对应的delete记录，反之亦然，当update一条记录时，它记录一条对应相反的update记录。
-  ```
+- 在数据修改的时候，不仅记录了redo log还记录了对应的undo log可以进行回滚
+  *undo log 和 redo log 记录物理日志不一样，undo log是*逻辑日志。可以认为当delete一条记录时，undo log中会记录一条对应的delete记录，反之亦然，当update一条记录时，它记录一条对应相反的update记录。
+
+  
+
+  
 
 - 提供多版本控制(MVCC)【*undo log实现多版本并发控制（MVCC）*】
 

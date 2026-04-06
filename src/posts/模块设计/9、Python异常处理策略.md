@@ -323,7 +323,7 @@ data = {
     'age': 18
 }
 
-if 'name' in data:
+if data['name']:
     print('success')
 ```
 
